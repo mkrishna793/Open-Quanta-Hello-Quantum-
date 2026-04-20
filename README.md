@@ -14,7 +14,7 @@
 
 ---
 
-## 🚀 What is open-Quanta?
+## 🚀 What is open-Quanta? ( This gives developers room to grow from writing a simple "Hello Quantum" script to experimenting with high-level quantum mechanics)
 
 open-Quanta is an **open-source Python library** that makes quantum computing accessible to every Python developer. Build quantum circuits using simple, readable Python code — no physics PhD required.
 
