@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openquanta"
+version = "0.1.0"
+description = "Modular quantum computing for every Python developer"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "open-Quanta Team"}
+]
+keywords = ["quantum", "computing", "qir", "python", "modular"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Quantum Computing",
+]
+
+dependencies = [
+    "pyqir>=0.5.0",
+    "qiskit>=1.0.0",
+    "qiskit-aer>=0.13.0",
+    "qiskit-ibm-runtime>=0.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/open-quanta/openquanta"
+Documentation = "https://github.com/open-quanta/openquanta#readme"
+Repository = "https://github.com/open-quanta/openquanta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["openquanta*"]
