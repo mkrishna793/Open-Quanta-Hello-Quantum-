@@ -1,6 +1,6 @@
 <div align="center">
 
-# open-Quanta
+# Open-Quanta
 
 **Modular Quantum Computing for Every Python Developer**
 
