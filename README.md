@@ -214,22 +214,22 @@ open-quanta/
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     USER CODE                                │
-│                                                              │
+│                     USER CODE                               │
+│                                                             │
 │   Circuit(2).apply(gates.H, 0).apply(gates.CNOT, 0, 1)      │
-│                                                              │
+│                                                             │
 └──────────────────────────┬──────────────────────────────────┘
                            │
                            ▼
-┌─────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────── ────────────────┐
 │                   open-Quanta CORE                           │
 │                                                              │
-│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│   │   Circuit   │  │    Gates    │  │   Modules   │         │
-│   │   Builder   │  │  Library    │  │   System    │         │
-│   └─────────────┘  └─────────────┘  └─────────────┘         │
-│          │                                     │              │
-│          └────────────────┬────────────────────┘              │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+│   │   Circuit   │  │    Gates    │  │   Modules   │          │
+│   │   Builder   │  │  Library    │  │   System    │          │
+│   └─────────────┘  └─────────────┘  └─────────────┘          │
+│          │                                     │             │
+│          └────────────────┬────────────────────┘             │
 │                           ▼                                  │
 │                  ┌─────────────┐                             │
 │                  │ QIR Bridge  │                             │
@@ -245,7 +245,7 @@ open-quanta/
 │   (Qiskit Aer)      │       │   (Industry Std)    │
 │                     │       │                     │
 │   Returns results   │       │  Runs on hardware   │
-│   {'00': 500}       │       │  IBM, Quantinuum   │
+│   {'00': 500}       │       │  IBM, Quantinuum    │
 └─────────────────────┘       └─────────────────────┘
 ```
 
@@ -356,9 +356,5 @@ MIT License - Open source and free to use.
 ---
 
 <div align="center">
-
-**Made with ❤️ for the quantum computing community**
-
-*Star ⭐ the repo if you find it useful!*
 
 </div>
