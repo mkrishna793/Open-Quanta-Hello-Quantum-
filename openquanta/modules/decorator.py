@@ -4,7 +4,7 @@ Module System for open-Quanta.
 Provides the @module decorator for creating reusable quantum circuits.
 """
 
-from typing import Callable, Optional, Any, List
+from typing import Callable, Optional
 from functools import wraps
 
 
