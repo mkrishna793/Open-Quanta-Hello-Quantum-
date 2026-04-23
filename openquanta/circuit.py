@@ -617,8 +617,17 @@ class Circuit:
 
         # Create grid using ASCII characters only
         wire_width = max(3, self.size * 4)
-        wires = [f"q{i}: " + "-" * wire_width for i in range(self.n_qubits)]
-        c_wires = [f"c{i}: " + " " * wire_width for i in range(self.n_bits)]
+
+        # Determine maximum prefix length for alignment
+        max_q_prefix = len(f"q{self.n_qubits - 1}: ")
+        max_c_prefix = len(f"c{self.n_bits - 1}: ") if self.n_bits > 0 else 0
+        prefix_len = max(max_q_prefix, max_c_prefix, 4)
+
+        # Optimized: Use list of characters for wires to avoid repeated string concatenation
+        wires = []
+        for i in range(self.n_qubits):
+            prefix = f"q{i}: ".ljust(prefix_len)
+            wires.append(list(prefix + "-" * wire_width))
 
         # Add gates
         col = 0
@@ -626,17 +635,21 @@ class Circuit:
             gate_str = self._gate_symbol(gate)
             for q in gate.targets:
                 if q < len(wires):
-                    pos = 4 + col * 4
-                    wire = list(wires[q])
+                    pos = prefix_len + col * 4
+                    wire = wires[q]
                     for i, c in enumerate(gate_str):
                         if pos + i < len(wire):
                             wire[pos + i] = c
-                    wires[q] = "".join(wire)
             col += 1
 
-        lines.extend(wires)
+        lines.extend(["".join(w) for w in wires])
+
         if self._measurements:
             lines.append("")
+            c_wires = []
+            for i in range(self.n_bits):
+                prefix = f"c{i}: ".ljust(prefix_len)
+                c_wires.append(prefix + " " * wire_width)
             lines.extend(c_wires)
 
         return "\n".join(lines)
