@@ -101,7 +101,15 @@ class SimulatorBackend(Backend):
             result = job.result()
 
             # Extract counts
-            counts = result.get_counts()
+            try:
+                counts = result.get_counts()
+            except Exception as e:
+                # If there are no counts (e.g. empty circuit or no measurements)
+                from qiskit.exceptions import QiskitError
+                if isinstance(e, QiskitError) and "No counts for experiment" in str(e):
+                    counts = {}
+                else:
+                    raise
 
             # Convert to our format
             return self._normalize_counts(counts, circuit)

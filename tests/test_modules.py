@@ -204,8 +204,8 @@ class TestAlgorithmModules:
     def test_qft(self):
         from openquanta.modules import QFT
 
-        qft = QFT(2)
-        c = qft()
+        # QFT is a module, calling QFT(2) returns the Circuit directly.
+        c = QFT(2)
 
         assert c.n_qubits == 2
         # QFT circuit should have multiple gates
