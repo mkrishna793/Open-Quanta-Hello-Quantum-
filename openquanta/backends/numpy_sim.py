@@ -184,6 +184,13 @@ class NumpyBackend(Backend):
                 [0, np.exp(1j * theta)]
             ])
 
+        # Hardcoded support for multi-qubit standard gates
+        if name == "CCX":
+            mat = np.eye(8, dtype=complex)
+            mat[6, 6] = 0; mat[6, 7] = 1
+            mat[7, 6] = 1; mat[7, 7] = 0
+            return mat
+
         return None
 
 # ============================================================================

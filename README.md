@@ -43,7 +43,7 @@ print(result)  # {'00': 500, '11': 500}
 | 🔧 **30+ Gates** | H, X, Y, Z, CNOT, Toffoli, rotations, and more |
 | 🧩 **Modular Design** | Build with reusable blocks, not from scratch |
 | 🔄 **Portable** | Generate QIR code that runs on any quantum hardware |
-| 🧪 **Easy Testing** | Free local simulation with Qiskit Aer |
+| 🧪 **Easy Testing** | Free local simulation with Numpy Statevector |
 | 🎯 **Pythonic API** | Clean, intuitive syntax that feels natural |
 | ⚡ **Pre-built Modules** | BellPair, GHZ, Grover, QFT, and more |
 | 🛠️ **Custom Gates** | Create your own gates with unitary matrices |
@@ -59,11 +59,15 @@ pip install openquanta
 ### Requirements
 
 - Python 3.10 or higher
-- Qiskit (for simulation)
 - PyQIR (for QIR generation)
+- NumPy (for fast local simulation)
 
 ```bash
-pip install qiskit qiskit-aer pyqir numpy
+pip install openquanta
+```
+Or to install with legacy IBM/Qiskit support:
+```bash
+pip install openquanta[legacy_ibm]
 ```
 
 ---
@@ -193,7 +197,7 @@ open-quanta/
 │   ├── qir_bridge.py         # QIR generation
 │   ├── backends/
 │   │   ├── base.py           # Abstract backend
-│   │   └── simulator.py      # Qiskit Aer simulator
+│   │   └── simulator.py      # Numpy Statevector simulator
 │   └── modules/
 │       ├── decorator.py      # @module decorator
 │       └── standard.py       # Pre-built circuits
@@ -242,10 +246,10 @@ open-quanta/
             ▼                               ▼
 ┌─────────────────────┐       ┌─────────────────────┐
 │   SIMULATOR         │       │      QIR CODE       │
-│   (Qiskit Aer)      │       │   (Industry Std)    │
+│   (Numpy Statevector)      │       │   (Industry Std)    │
 │                     │       │                     │
 │   Returns results   │       │  Runs on hardware   │
-│   {'00': 500}       │       │  IBM, Quantinuum    │
+│   {'00': 500}       │       │  Open Hardware (QICK, AQT)    │
 └─────────────────────┘       └─────────────────────┘
 ```
 
@@ -274,7 +278,7 @@ c.apply(gates.CNOT, 0, 1) # Adds Gate("CNOT", [0, 1], [])
 
 ```python
 # Internally converts our Circuit to Qiskit QuantumCircuit
-# Runs simulation using Qiskit Aer
+# Runs simulation using Numpy Statevector
 # Returns results as Python dict
 result = c.simulate()  # {'00': 500, '11': 500}
 ```
@@ -317,7 +321,7 @@ pytest tests/
 | ✅ Core | Complete | Gates, Circuit, Simulator, QIR |
 | ✅ Modules | Complete | Pre-built quantum circuits |
 | ✅ QIR | Complete | Microsoft PyQIR integration |
-| 🚧 Hardware | Planned | IBM Quantum backend |
+| 🚧 Hardware | Planned | QICK & Open Hardware |
 | 🚧 PyPI | Planned | pip install openquanta |
 
 ---

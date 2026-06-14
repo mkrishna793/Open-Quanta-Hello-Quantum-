@@ -564,6 +564,10 @@ class Circuit:
             return self.simulate(shots=shots)
         elif backend == "qiskit":
             return self.simulate(shots=shots, backend="qiskit")
+        elif backend == "rust":
+            from .backends import RustBackend
+            sim = RustBackend()
+            return sim.execute(self, shots=shots)
 
         # Try to import and use hardware backends
         if backend.startswith("ibm"):
