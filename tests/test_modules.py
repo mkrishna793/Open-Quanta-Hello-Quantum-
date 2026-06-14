@@ -287,6 +287,8 @@ class TestModuleIntegration:
         c = Prepare()
         c2 = Entangle()
         c.gates.extend(c2.gates)
+        c._measurements.update(c2._measurements)
+        c.n_bits = max(c.n_bits, c2.n_bits)
 
         result = c.simulate(shots=100)
         assert sum(result.values()) == 100

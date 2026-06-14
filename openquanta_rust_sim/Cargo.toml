@@ -1,0 +1,14 @@
+[package]
+name = "openquanta_rust_sim"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "openquanta_rust_sim"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.29.0"
+num-complex = "0.4"
+rand = "0.8"

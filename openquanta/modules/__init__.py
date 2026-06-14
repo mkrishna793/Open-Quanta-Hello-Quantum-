@@ -33,6 +33,11 @@ from .standard import (
     AllX,
     AllH,
 )
+from .advanced import (
+    BitFlipCode,
+    QNNLayer,
+    QAOA_MaxCut,
+)
 
 __all__ = [
     # Decorator
@@ -59,4 +64,9 @@ __all__ = [
     "Identity",
     "AllX",
     "AllH",
+
+    # Advanced modules
+    "BitFlipCode",
+    "QNNLayer",
+    "QAOA_MaxCut",
 ]

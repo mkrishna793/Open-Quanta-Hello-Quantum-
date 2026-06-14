@@ -835,7 +835,7 @@ print("You should see roughly 50% 0s and 50% 1s")
 Add IBM Quantum hardware backend.
 
 ### Tasks
-- [ ] Create IBM backend class
+- [ ] Create Open Hardware backend class
 - [ ] Handle IBM API credentials
 - [ ] Implement job submission
 - [ ] Handle job status and results
@@ -878,7 +878,7 @@ class IBMBackend(Backend):
 ```
 
 ### Success Criteria
-- IBM backend connects
+- Open Hardware backend connects
 - Jobs submit successfully
 - Results return correctly
 

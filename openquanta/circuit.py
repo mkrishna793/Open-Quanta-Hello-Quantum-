@@ -529,9 +529,13 @@ class Circuit:
             Dictionary mapping measurement outcomes to counts
             e.g., {'00': 500, '11': 500}
         """
-        from .backends import SimulatorBackend
+        if backend == "qiskit":
+            from .backends import SimulatorBackend
+            sim = SimulatorBackend()
+        else:
+            from .backends import NumpyBackend
+            sim = NumpyBackend()
 
-        sim = SimulatorBackend()
         return sim.execute(self, shots=shots)
 
     def run(
@@ -544,7 +548,7 @@ class Circuit:
         Run the circuit on a specified backend.
 
         Args:
-            backend: Backend name ("simulator", "ibm", etc.)
+            backend: Backend name ("simulator", "qiskit", "ibm", etc.)
             shots: Number of shots
             **kwargs: Additional backend-specific options
 
@@ -558,6 +562,12 @@ class Circuit:
 
         if backend == "simulator":
             return self.simulate(shots=shots)
+        elif backend == "qiskit":
+            return self.simulate(shots=shots, backend="qiskit")
+        elif backend == "rust":
+            from .backends import RustBackend
+            sim = RustBackend()
+            return sim.execute(self, shots=shots)
 
         # Try to import and use hardware backends
         if backend.startswith("ibm"):
@@ -572,20 +582,6 @@ class Circuit:
                 )
 
         raise ValueError(f"Unknown backend: {backend}")
-
-    def to_qir(self) -> str:
-        """
-        Convert circuit to QIR (Quantum Intermediate Representation).
-
-        Returns:
-            QIR code as string
-        """
-        from .qir_bridge import circuit_to_qir
-        return circuit_to_qir(self)
-
-    # ========================================================================
-    # VISUALIZATION
-    # ========================================================================
 
     def draw(self, output: str = "text") -> str:
         """
@@ -653,6 +649,16 @@ class Circuit:
             lines.extend(c_wires)
 
         return "\n".join(lines)
+
+    def to_qir(self) -> str:
+        """
+        Convert circuit to QIR (Quantum Intermediate Representation).
+
+        Returns:
+            QIR code as a string
+        """
+        from .qir_bridge import circuit_to_qir
+        return circuit_to_qir(self)
 
     def _gate_symbol(self, gate: Any) -> str:
         """Get symbol for gate in ASCII diagram."""

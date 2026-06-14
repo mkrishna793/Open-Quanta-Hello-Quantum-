@@ -25,12 +25,15 @@ classifiers = [
 
 dependencies = [
     "pyqir>=0.5.0",
+    "numpy>=1.20.0",
+]
+
+[project.optional-dependencies]
+legacy_ibm = [
     "qiskit>=1.0.0",
     "qiskit-aer>=0.13.0",
     "qiskit-ibm-runtime>=0.20.0",
 ]
-
-[project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
