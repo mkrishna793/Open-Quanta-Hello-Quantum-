@@ -618,12 +618,17 @@ def custom_gate(
     Returns:
         Function that creates the gate when called with qubit indices.
     """
-    def factory(*qubits: int) -> CustomGate:
-        return CustomGate(name=name, targets=list(qubits), matrix=matrix)
+    def decorator(func: Callable) -> Callable:
+        def factory(*args, **kwargs) -> CustomGate:
+            # Call the wrapped function to get the target qubits
+            targets = func(*args, **kwargs)
+            return CustomGate(name=name, targets=targets, matrix=matrix)
 
-    factory.__name__ = name
-    factory.__doc__ = f"Custom gate: {name}"
-    return factory
+        factory.__name__ = func.__name__
+        factory.__doc__ = f"Custom gate: {name}"
+        return factory
+
+    return decorator
 
 
 # ============================================================================

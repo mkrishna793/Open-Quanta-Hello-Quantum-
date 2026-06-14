@@ -218,7 +218,12 @@ def compose_modules(*modules: Module, name: Optional[str] = None) -> Module:
         from ..circuit import Circuit
 
         # Get circuits from all modules
-        circuits = [m() for m in modules]
+        circuits = []
+        for m in modules:
+            if isinstance(m, Circuit) or not callable(m):
+                circuits.append(m)
+            else:
+                circuits.append(m())
 
         # Find total qubits needed
         total_qubits = max(c.n_qubits for c in circuits)
